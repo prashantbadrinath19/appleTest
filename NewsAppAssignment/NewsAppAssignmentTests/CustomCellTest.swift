@@ -12,6 +12,7 @@ class CustomCellTest: XCTestCase {
     
     var mockCustomCellObj: MockCustomCell!
     override func setUpWithError() throws {
+        //creating mock object
         mockCustomCellObj = MockCustomCell()
     }
     
@@ -20,7 +21,7 @@ class CustomCellTest: XCTestCase {
     }
     
     func testExample() throws {
-        mockCustomCellObj.setData(title: "", author: "", image: "")
+        mockCustomCellObj.setData(title: "TestTitle", author: "TestAuthor", image: "TestImage")
         XCTAssertTrue(mockCustomCellObj.setDataCalled)
     }
 }

@@ -29,12 +29,12 @@ struct NewsDetailsView: View {
                 Text("Source: \(data[0]?.source.name ?? "")")
                     .padding(.leading, 5)
                     .font(.system(size: 12, weight: .light, design: .default))
-
+                
                 Spacer()
             }
             
             ScrollView(){
-                
+                //SDWebImageSwiftUI used for displaying Image from url
                 WebImage(url: URL(string: data[0]!.urlToImage))
                     .resizable()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
@@ -56,10 +56,10 @@ struct NewsDetailsView: View {
                 }
                 
                 HStack{
+                    //navigating to WKWebView with URL request
                     NavigationLink(destination: URLWebView(request: URLRequest(url: URL(string: data[0]?.url ?? "")!))){
                         Text(data[0]?.url ?? "")
                     }
-                    
                     Spacer()
                 }
             }

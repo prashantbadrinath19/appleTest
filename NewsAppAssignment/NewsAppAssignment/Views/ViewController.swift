@@ -30,11 +30,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            filterData.count
+        filterData.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? CustomCell
         let article = filterData[indexPath.row]
@@ -44,38 +44,39 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cell?.setData(title: title!, author: author!, image: imageUrl!)
         return cell!
     }
-
+    // handling Tap on CollectionView cells
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let article : [Article?] = [filterData[indexPath.row]]
         let newsDetailsView = NewsDetailsView(data: article, indexPath : indexPath.row)
         let host = UIHostingController(rootView: newsDetailsView)
         navigationController?.pushViewController(host, animated: true)
     }
-        
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.size.height
+        let width = collectionView.frame.size.width
+        return CGSize (width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    //SearchBar implementation
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let enteredText = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         if !enteredText.isEmpty {
             filterData = newsVM.data.filter({ (article) -> Bool in
                 article?.title.lowercased().contains(enteredText) ?? false || article?.description.lowercased().contains(enteredText) ?? false || article?.content.lowercased().contains(enteredText) ?? false
-                })
+            })
         } else {
             filterData = newsVM.data
         }
         self.newsCollection.reloadData()
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           let height = collectionView.frame.size.height
-           let width = collectionView.frame.size.width
-           return CGSize (width: width, height: height)
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-           return 0
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-           return 0
-       }
 }
 

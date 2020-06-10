@@ -19,6 +19,7 @@ class ViewModel: NewsArticleProtocol {
 
     let endPoint = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=f1f4a790b8064b4f85b86285780e71e5"
     
+    //Fetching the data and storing it for the given end point
     func getNews(completion: @escaping ([Article?]?,Error?) -> ()) {
         ApiHandler.sharedInstance.getData(urlString: endPoint) { (response, error) in
             if let newsResponse = response {

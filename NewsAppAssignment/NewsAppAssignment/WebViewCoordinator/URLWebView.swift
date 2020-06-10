@@ -11,6 +11,7 @@ import WebKit
   
 struct URLWebView : UIViewRepresentable {
       
+    //Coordinator to connect SwiftUI to WKWebView delegate functions.
     let request: URLRequest
       
     func makeUIView(context: Context) -> WKWebView  {

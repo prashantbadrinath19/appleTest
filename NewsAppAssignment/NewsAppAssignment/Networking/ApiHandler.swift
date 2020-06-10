@@ -14,6 +14,7 @@ class ApiHandler : NSObject{
 
     static let sharedInstance = ApiHandler()
     
+    //Fetching News Data
     func getData(urlString: String, completion: @escaping completionHandler) {
         
         let url = URL(string: urlString)

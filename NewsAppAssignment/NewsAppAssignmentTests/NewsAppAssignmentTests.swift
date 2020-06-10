@@ -13,6 +13,7 @@ class NewsAppAssignmentTests: XCTestCase {
 
     var mockObj : MockNewsArticleProtocol!
     override func setUp() {
+        //creating mock object
         mockObj = MockNewsArticleProtocol()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -34,10 +35,8 @@ class NewsAppAssignmentTests: XCTestCase {
 
 
 class MockNewsArticleProtocol: NewsArticleProtocol{
-    var mockArticle = Article(source: Source(id: "1", name: "Adam"), author: "Jane", title: "", description: "", url: "", urlToImage: "", publishedAt: "", content: "")
+    var mockArticle = Article(source: Source(id: "1", name: "Adam"), author: "Jane", title: "TestTitle", description: "TestDescription", url: "TestUrl", urlToImage: "TestUrlImage", publishedAt: "testPublished", content: "testContent")
     func getNews(completion: @escaping ([Article?]?, Error?) -> ()) {
-        
-        
         completion([mockArticle], nil)
     }
   
