@@ -10,14 +10,13 @@ import UIKit
 import SwiftUI
 
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var newsCollection: UICollectionView!
     var filterData : [Article?] = []
     let newsVM: ViewModel = ViewModel()
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         title = "News Headlines"
         self.searchBar.delegate = self
@@ -32,7 +31,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
 
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             filterData.count
     }
@@ -65,23 +63,19 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         self.newsCollection.reloadData()
     }
-}
-
-
-extension ViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = collectionView.frame.size.height
-        let width = collectionView.frame.size.width
-        return CGSize (width: width, height: height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+           let height = collectionView.frame.size.height
+           let width = collectionView.frame.size.width
+           return CGSize (width: width, height: height)
+       }
+       
+       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+           return 0
+       }
+       
+       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+           return 0
+       }
 }
 
