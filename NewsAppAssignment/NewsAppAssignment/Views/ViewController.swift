@@ -30,11 +30,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 return
             }
         }
-        // Do any additional setup after loading the view.
     }
 
-    
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             filterData.count
@@ -43,8 +40,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? CustomCell
         let article = filterData[indexPath.row]
-
-//        let article = newsVM.data[indexPath.row]
         let title = article?.title
         let author = article?.author
         let imageUrl = article?.urlToImage
@@ -58,10 +53,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let host = UIHostingController(rootView: newsDetailsView)
         navigationController?.pushViewController(host, animated: true)
     }
-    
-    
-    
-    
+        
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let enteredText = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         if !enteredText.isEmpty {
@@ -73,8 +65,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         self.newsCollection.reloadData()
     }
-
-   
 }
 
 

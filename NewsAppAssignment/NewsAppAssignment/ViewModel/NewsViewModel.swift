@@ -8,8 +8,11 @@
 
 import Foundation
 
+protocol NewsArticleProtocol {
+    func getNews(completion: @escaping ([Article?]?,Error?) -> ())
+}
 
-class ViewModel {
+class ViewModel: NewsArticleProtocol {
     var data: [Article?] = []
 
     var articleURL2Id : [String: Int] = [:]

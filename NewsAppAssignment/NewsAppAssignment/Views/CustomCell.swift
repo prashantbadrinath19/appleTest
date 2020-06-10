@@ -8,7 +8,10 @@
 
 import UIKit
 
-class CustomCell: UICollectionViewCell {
+protocol CustomCellProtocol {
+    func setData(title : String, author: String, image: String)
+}
+class CustomCell: UICollectionViewCell, CustomCellProtocol {
 
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var newsTitle: UILabel!
