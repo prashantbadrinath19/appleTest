@@ -1,0 +1,97 @@
+//
+//  ViewController.swift
+//  NewsAppAssignment
+//
+//  Created by Prashant  Badrinath on 6/9/20.
+//  Copyright © 2020 Prashant  Badrinath. All rights reserved.
+//
+
+import UIKit
+import SwiftUI
+
+
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var newsCollection: UICollectionView!
+    var filterData : [Article?] = []
+    let newsVM: ViewModel = ViewModel()
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        title = "News Headlines"
+        self.searchBar.delegate = self
+        newsVM.getNews { (response, error) in
+            guard let _ = error else {
+                DispatchQueue.main.async {
+                    self.filterData = response ?? []
+                    self.newsCollection.reloadData();
+                }
+                return
+            }
+        }
+        // Do any additional setup after loading the view.
+    }
+
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            filterData.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? CustomCell
+        let article = filterData[indexPath.row]
+
+//        let article = newsVM.data[indexPath.row]
+        let title = article?.title
+        let author = article?.author
+        let imageUrl = article?.urlToImage
+        cell?.setData(title: title!, author: author!, image: imageUrl!)
+        return cell!
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let article : [Article?] = [filterData[indexPath.row]]
+        let newsDetailsView = NewsDetailsView(data: article, indexPath : indexPath.row)
+        let host = UIHostingController(rootView: newsDetailsView)
+        navigationController?.pushViewController(host, animated: true)
+    }
+    
+    
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let enteredText = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        if !enteredText.isEmpty {
+            filterData = newsVM.data.filter({ (article) -> Bool in
+                article?.title.lowercased().contains(enteredText) ?? false || article?.description.lowercased().contains(enteredText) ?? false || article?.content.lowercased().contains(enteredText) ?? false
+                })
+        } else {
+            filterData = newsVM.data
+        }
+        self.newsCollection.reloadData()
+    }
+
+   
+}
+
+
+extension ViewController : UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.size.height
+        let width = collectionView.frame.size.width
+        return CGSize (width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
