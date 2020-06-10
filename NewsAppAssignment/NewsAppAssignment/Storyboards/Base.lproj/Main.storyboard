@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="InN-ei-G5V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="InN-ei-G5V">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,15 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n6o-WO-fyn">
-                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" placeholder="News Search" translatesAutoresizingMaskIntoConstraints="NO" id="n6o-WO-fyn">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3DN-Ym-hbZ">
-                                <rect key="frame" x="0.0" y="132" width="414" height="334"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3DN-Ym-hbZ">
+                                <rect key="frame" x="0.0" y="149" width="414" height="380"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="380" id="cRI-O3-g9t"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vo0-4b-D8I">
                                     <size key="itemSize" width="409" height="296"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -33,7 +34,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomCell" id="9O8-Cg-PkR" customClass="CustomCell" customModule="NewsAppAssignment" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="19" width="409" height="296"/>
+                                        <rect key="frame" x="0.0" y="42" width="409" height="296"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YQ9-lY-LhZ">
                                             <rect key="frame" x="0.0" y="0.0" width="409" height="296"/>
@@ -92,6 +93,14 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="n6o-WO-fyn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Itf-JF-6CA"/>
+                            <constraint firstItem="3DN-Ym-hbZ" firstAttribute="top" secondItem="n6o-WO-fyn" secondAttribute="bottom" constant="5" id="OdU-m5-Mc2"/>
+                            <constraint firstItem="3DN-Ym-hbZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Wzc-O2-Ozv"/>
+                            <constraint firstItem="n6o-WO-fyn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gao-wP-TOs"/>
+                            <constraint firstItem="3DN-Ym-hbZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qcK-YG-riP"/>
+                            <constraint firstItem="n6o-WO-fyn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xOH-LR-oR8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="4cs-ts-R6y"/>
