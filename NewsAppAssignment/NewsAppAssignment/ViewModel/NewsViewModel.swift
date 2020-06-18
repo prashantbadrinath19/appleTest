@@ -17,20 +17,19 @@ class ViewModel: NewsArticleProtocol {
 
     var articleURL2Id : [String: Int] = [:]
 
-    let endPoint = "https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=f1f4a790b8064b4f85b86285780e71e5"
+    let endPoint = Constants.endpointURL
     
     //Fetching the data and storing it for the given end point
     func getNews(completion: @escaping ([Article?]?,Error?) -> ()) {
-        ApiHandler.sharedInstance.getData(urlString: endPoint) { (response, error) in
-            if let newsResponse = response {
-                self.data = newsResponse.articles
-                completion(self.data, nil)
-            } else {
-                completion(nil, error)
+            ApiHandler.sharedInstance.getData(urlString: self.endPoint) { (response, error) in
+                if let newsResponse = response {
+                    self.data = newsResponse.articles
+                    completion(self.data, nil)
+                } else {
+                    completion(nil, error)
+                }
             }
-        }
     }
-    
 }
 
 

@@ -11,6 +11,8 @@ import WebKit
 
 class MyWkWebView: WKWebView, WKNavigationDelegate {
     
+  
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
     }

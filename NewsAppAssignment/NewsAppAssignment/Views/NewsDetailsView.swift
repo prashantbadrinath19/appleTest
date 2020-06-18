@@ -34,7 +34,7 @@ struct NewsDetailsView: View {
             }
             
             ScrollView(){
-                //SDWebImageSwiftUI used for displaying Image from url
+                //3PL SDWebImageSwiftUI used for displaying Image from url
                 WebImage(url: URL(string: data[0]!.urlToImage))
                     .resizable()
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)

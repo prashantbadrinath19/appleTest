@@ -14,10 +14,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var newsCollection: UICollectionView!
+    
     var filterData : [Article?] = []
     let newsVM: ViewModel = ViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         title = "News Headlines"
         self.searchBar.delegate = self
         newsVM.getNews { (response, error) in
@@ -31,10 +34,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
     
+    //MARK: CollectionView
+    
+    //Defining number of sections in CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filterData.count
     }
     
+    //Presenting the data in the cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as? CustomCell
         let article = filterData[indexPath.row]
@@ -44,7 +51,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cell?.setData(title: title!, author: author!, image: imageUrl!)
         return cell!
     }
-    // handling Tap on CollectionView cells
+    
+    //Handling Tap on CollectionView cells
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let article : [Article?] = [filterData[indexPath.row]]
         let newsDetailsView = NewsDetailsView(data: article, indexPath : indexPath.row)
@@ -66,6 +74,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return 0
     }
     
+    //MARK: Search Bar
     //SearchBar implementation
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let enteredText = searchText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
@@ -78,5 +87,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         self.newsCollection.reloadData()
     }
+    
+    
 }
 

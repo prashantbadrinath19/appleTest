@@ -18,6 +18,7 @@ class ApiHandler : NSObject{
     func getData(urlString: String, completion: @escaping completionHandler) {
         
         let url = URL(string: urlString)
+        //
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
 
             if error ==  nil {
